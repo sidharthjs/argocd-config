@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-app
+  template:
+    metadata:
+      labels:
+        app: users-app
+    spec:
+      containers:
+      - image: djsidhu15/users:2.1
+        name: users-app
+        env:
+        - name: POSTGRES_DB
+          value: users
+        - name: POSTGRES_HOST
+          value: postgres-users
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_USER
+          value: user_1
+        - name: POSTGRES_PASSWORD
+          value: password_1
+        ports:
+        - containerPort: 4000
